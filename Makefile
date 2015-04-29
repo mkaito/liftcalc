@@ -1,4 +1,4 @@
-CFLAGS=-Wall -Werror -pedantic
+CFLAGS=-Wall -Werror -pedantic -std=c99
 
 all: liftcalc
 
