@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 void print_help() {
   puts("Usage:\n"
@@ -22,6 +23,13 @@ int reps(int set) {
   }
 }
 
+void test_reps() {
+  assert(reps(1) == 5);
+  assert(reps(2) == 3);
+  assert(reps(3) == 2);
+  assert(reps(25) == 2);
+}
+
 /*
   Calculate weight for set
 
@@ -34,7 +42,23 @@ int weight(int empty, int wta, int step, int set) {
   return (empty + wta * (step * set) / 100) / 5 * 5;
 }
 
+void test_weight() {
+  assert(weight(20, 40, 25, 2) == 40);
+  assert(weight(60, 60, 25, 3) == 105);
+  assert(weight(20, 0, 25, 3) == 20);
+}
+
 int main(int argc, char *argv[]) {
+
+  // Run tests first, disable with -DNDEBUG
+  #ifndef NDEBUG
+  test_reps();
+  test_weight();
+
+  puts("All tests passed");
+  return 0;
+  #endif
+
   /*
     wta = weight to add, i.e., the difference between your lightest warmup and
     your work weight.
@@ -86,4 +110,5 @@ int main(int argc, char *argv[]) {
   }
 
   return 0;
+
 }
